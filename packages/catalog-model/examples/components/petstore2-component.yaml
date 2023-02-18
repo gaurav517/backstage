@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: petstore
+  name: petstore2
   # This is an extra long description with Markdown
   description: |
     [The Petstore](http://petstore.example.com) is an example API used to show features of the OpenAPI spec.
@@ -17,7 +17,3 @@ spec:
   type: service
   lifecycle: experimental
   owner: team-c
-  providesApis:
-    - petstore
-    - streetlights
-    - hello-world
