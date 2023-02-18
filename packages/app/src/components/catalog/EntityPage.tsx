@@ -166,6 +166,7 @@ import {
   isLinguistAvailable,
   EntityLinguistCard,
 } from '@backstage/plugin-linguist';
+import { isAdrAvailable, EntityAdrContent } from '@backstage/plugin-adr';
 
 const customEntityFilterKind = ['Component', 'API', 'System'];
 
@@ -473,6 +474,10 @@ const serviceEntityPage = (
 
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route if={isAdrAvailable} path="/adrs" title="ADRs">
+      <EntityAdrContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route

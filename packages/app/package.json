@@ -16,6 +16,8 @@
     "@backstage/core-plugin-api": "workspace:^",
     "@backstage/integration-react": "workspace:^",
     "@backstage/plugin-airbrake": "workspace:^",
+    "@backstage/plugin-adr": "workspace:^",
+    "@backstage/plugin-adr-common": "workspace:^",
     "@backstage/plugin-apache-airflow": "workspace:^",
     "@backstage/plugin-api-docs": "workspace:^",
     "@backstage/plugin-azure-devops": "workspace:^",

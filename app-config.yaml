@@ -260,6 +260,8 @@ catalog:
     # Backstage example entities
     - type: file
       target: ../catalog-model/examples/all.yaml
+    - type: url
+      target: https://github.com/gaurav517/backstage/blob/test-adr-data/packages/catalog-model/examples/components/petstore2-component.yaml
     # Backstage example groups and users
     - type: file
       target: ../catalog-model/examples/acme-corp.yaml
