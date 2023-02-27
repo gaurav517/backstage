@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { type EntityFilterQuery } from '@backstage/catalog-client';
 import { useApi } from '@backstage/core-plugin-api';
 import {
   catalogApiRef,
@@ -24,37 +23,24 @@ import FormControl from '@material-ui/core/FormControl';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React, { useCallback, useEffect } from 'react';
 import useAsync from 'react-use/lib/useAsync';
-import { EntityPickerProps } from './schema';
+import { MultiEntityPickerProps } from './schema';
+import { entityPickerUIOptions } from '../EntityPicker/EntityPicker';
 
-export { EntityPickerSchema } from './schema';
-
-export const entityPickerUIOptions = (uiSchema: any) => {
-  const allowedKinds = uiSchema['ui:options']?.allowedKinds;
-
-  const catalogFilter: EntityFilterQuery | undefined =
-    uiSchema['ui:options']?.catalogFilter ||
-    (allowedKinds && { kind: allowedKinds });
-
-  const defaultKind = uiSchema['ui:options']?.defaultKind;
-  const defaultNamespace = uiSchema['ui:options']?.defaultNamespace;
-
-  return {
-    defaultKind,
-    defaultNamespace,
-    catalogFilter,
-  };
-};
+export { MultiEntityPickerSchema } from './schema';
 
 /**
- * The underlying component that is rendered in the form for the `EntityPicker`
+ * The underlying component that is rendered in the form for the `MultiEntityPicker`
  * field extension.
  *
  * @public
  */
-export const EntityPicker = (props: EntityPickerProps) => {
+export const MultiEntityPicker = (props: MultiEntityPickerProps) => {
   const {
     onChange,
-    schema: { title = 'Entity', description = 'An entity from the catalog' },
+    schema: {
+      title = 'Entities',
+      description = 'Multiple entities from the catalog',
+    },
     required,
     uiSchema,
     rawErrors,
@@ -78,7 +64,7 @@ export const EntityPicker = (props: EntityPickerProps) => {
   );
 
   const onSelect = useCallback(
-    (_: any, value: string | null) => {
+    (_: any, value: string[] | null) => {
       onChange(value ?? undefined);
     },
     [onChange],
@@ -97,14 +83,15 @@ export const EntityPicker = (props: EntityPickerProps) => {
       error={rawErrors?.length > 0 && !formData}
     >
       <Autocomplete
+        multiple
+        filterSelectedOptions
         disabled={entityRefs?.length === 1}
         id={idSchema?.$id}
-        value={(formData as string) || ''}
+        value={(formData as string[]) || []}
         loading={loading}
         onChange={onSelect}
         options={entityRefs || []}
-        autoSelect
-        freeSolo={uiSchema['ui:options']?.allowArbitraryValues ?? true}
+        freeSolo={uiSchema['ui:options']?.allowArbitraryValues ?? false}
         renderInput={params => (
           <TextField
             {...params}

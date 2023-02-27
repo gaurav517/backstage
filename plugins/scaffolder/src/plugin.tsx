@@ -24,6 +24,10 @@ import {
   EntityPicker,
   EntityPickerSchema,
 } from './components/fields/EntityPicker/EntityPicker';
+import {
+  MultiEntityPicker,
+  MultiEntityPickerSchema,
+} from './components/fields/MultiEntityPicker/MultiEntityPicker';
 import { entityNamePickerValidation } from './components/fields/EntityNamePicker';
 import {
   EntityNamePicker,
@@ -108,6 +112,19 @@ export const EntityPickerFieldExtension = scaffolderPlugin.provide(
     component: EntityPicker,
     name: 'EntityPicker',
     schema: EntityPickerSchema,
+  }),
+);
+
+/**
+ * A field extension for selecting multiple entities that exist in the Catalog.
+ *
+ * @public
+ */
+export const MultiEntityPickerFieldExtension = scaffolderPlugin.provide(
+  createScaffolderFieldExtension({
+    component: MultiEntityPicker,
+    name: 'MultiEntityPicker',
+    schema: MultiEntityPickerSchema,
   }),
 );
 

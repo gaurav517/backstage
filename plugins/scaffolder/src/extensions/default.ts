@@ -39,12 +39,21 @@ import {
   OwnedEntityPicker,
   OwnedEntityPickerSchema,
 } from '../components/fields/OwnedEntityPicker/OwnedEntityPicker';
+import {
+  MultiEntityPicker,
+  MultiEntityPickerSchema,
+} from '../components/fields/MultiEntityPicker/MultiEntityPicker';
 
 export const DEFAULT_SCAFFOLDER_FIELD_EXTENSIONS = [
   {
     component: EntityPicker,
     name: 'EntityPicker',
     schema: EntityPickerSchema,
+  },
+  {
+    component: MultiEntityPicker,
+    name: 'MultiEntityPicker',
+    schema: MultiEntityPickerSchema,
   },
   {
     component: EntityNamePicker,

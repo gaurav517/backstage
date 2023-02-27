@@ -23,6 +23,7 @@ export { ScaffolderClient } from './api';
 
 export {
   EntityPickerFieldExtension,
+  MultiEntityPickerFieldExtension,
   EntityNamePickerFieldExtension,
   EntityTagsPickerFieldExtension,
   OwnerPickerFieldExtension,

@@ -23,43 +23,45 @@ export const entityQueryFilterExpressionSchema = z.record(
   z.string().or(z.array(z.string())),
 );
 
+export const entityPickerOptionsSchema = z.object({
+  /**
+   * @deprecated Use `catalogFilter` instead.
+   */
+  allowedKinds: z
+    .array(z.string())
+    .optional()
+    .describe(
+      'DEPRECATED: Use `catalogFilter` instead. List of kinds of entities to derive options from',
+    ),
+  defaultKind: z
+    .string()
+    .optional()
+    .describe(
+      'The default entity kind. Options of this kind will not be prefixed.',
+    ),
+  allowArbitraryValues: z
+    .boolean()
+    .optional()
+    .describe('Whether to allow arbitrary user input. Defaults to true'),
+  defaultNamespace: z
+    .union([z.string(), z.literal(false)])
+    .optional()
+    .describe(
+      'The default namespace. Options with this namespace will not be prefixed.',
+    ),
+  catalogFilter: z
+    .array(entityQueryFilterExpressionSchema)
+    .or(entityQueryFilterExpressionSchema)
+    .optional()
+    .describe('List of key-value filter expression for entities'),
+});
+
 /**
  * @public
  */
 export const EntityPickerFieldSchema = makeFieldSchemaFromZod(
   z.string(),
-  z.object({
-    /**
-     * @deprecated Use `catalogFilter` instead.
-     */
-    allowedKinds: z
-      .array(z.string())
-      .optional()
-      .describe(
-        'DEPRECATED: Use `catalogFilter` instead. List of kinds of entities to derive options from',
-      ),
-    defaultKind: z
-      .string()
-      .optional()
-      .describe(
-        'The default entity kind. Options of this kind will not be prefixed.',
-      ),
-    allowArbitraryValues: z
-      .boolean()
-      .optional()
-      .describe('Whether to allow arbitrary user input. Defaults to true'),
-    defaultNamespace: z
-      .union([z.string(), z.literal(false)])
-      .optional()
-      .describe(
-        'The default namespace. Options with this namespace will not be prefixed.',
-      ),
-    catalogFilter: z
-      .array(entityQueryFilterExpressionSchema)
-      .or(entityQueryFilterExpressionSchema)
-      .optional()
-      .describe('List of key-value filter expression for entities'),
-  }),
+  entityPickerOptionsSchema,
 );
 
 /**
